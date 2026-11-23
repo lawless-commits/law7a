@@ -489,6 +489,12 @@
             </select>
             <i data-lucide="chevron-down" class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"></i>
           </div>
+          <div id="otherWrap" hidden class="mt-4">
+            <label for="industryOther" class="text-sm font-semibold">Please specify your industry <span class="text-cobalt">*</span></label>
+            <input id="industryOther" name="industryOther" type="text" maxlength="60" placeholder="e.g. Landscaping, Hair salon, Car wash" aria-describedby="otherErr"
+              class="mt-2 w-full rounded-xl border border-line bg-paper px-4 py-3 text-base outline-none transition placeholder:text-muted/60 focus:border-cobalt focus:bg-white focus:ring-4 focus:ring-cobalt/10 aria-[invalid=true]:border-red-500">
+            <p id="otherErr" hidden class="mt-2 flex items-center gap-1.5 text-sm text-red-600"><i data-lucide="alert-circle" class="h-4 w-4"></i>Tell us what industry you're in.</p>
+          </div>
         </div>
 
         <fieldset>
@@ -785,14 +791,19 @@
   const preview = document.getElementById('waPreview');
   const send = document.getElementById('waSend');
   const err = document.getElementById('businessErr');
+  const otherWrap = document.getElementById('otherWrap');
+  const other = form.elements.industryOther;
+  const otherErr = document.getElementById('otherErr');
+  const isOther = () => form.elements.industry.value === 'Other';
 
   function buildMessage() {
     const d = new FormData(form);
     const name = d.get('business').trim();
     const industry = d.get('industry');
+    const otherText = d.get('industryOther').trim();
     const needs = d.get('needs').trim();
     const lines = ["Hi LAW7A, I'd like a free website preview.", '', `Business: ${name || '[Your business name]'}`];
-    if (industry) lines.push(`Industry: ${industry}`);
+    if (industry) lines.push(`Industry: ${industry === 'Other' && otherText ? `Other (${otherText})` : industry}`);
     lines.push(`Package: ${d.get('pkg')}`);
     if (needs) lines.push(`What I need: ${needs}`);
     return lines.join('\n');
@@ -801,17 +812,22 @@
     const msg = buildMessage();
     preview.textContent = msg;
     send.href = waUrl(msg);
-    if (business.value.trim()) { err.hidden = true; business.removeAttribute('aria-invalid'); }
+    otherWrap.hidden = !isOther();
+    for (const [field, el] of [[business, err], [other, otherErr]]) {
+      if (field.value.trim()) { el.hidden = true; field.removeAttribute('aria-invalid'); }
+    }
   }
   form.addEventListener('input', update);
   form.addEventListener('change', update);
+  form.elements.industry.addEventListener('change', () => { update(); if (isOther()) other.focus(); });
   form.addEventListener('submit', e => { e.preventDefault(); send.click(); });
   send.addEventListener('click', e => {
-    if (business.value.trim()) return;
+    const required = isOther() ? [[business, err], [other, otherErr]] : [[business, err]];
+    const invalid = required.filter(([field]) => !field.value.trim());
+    if (!invalid.length) return;
     e.preventDefault();
-    err.hidden = false;
-    business.setAttribute('aria-invalid', 'true');
-    business.focus();
+    invalid.forEach(([field, el]) => { el.hidden = false; field.setAttribute('aria-invalid', 'true'); });
+    invalid[0][0].focus();
   });
   document.querySelectorAll('[data-pkg]').forEach(a => a.addEventListener('click', () => {
     form.querySelector(`input[name="pkg"][value="${a.dataset.pkg}"]`).checked = true;
