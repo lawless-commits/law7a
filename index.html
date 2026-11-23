@@ -803,7 +803,7 @@
     const otherText = d.get('industryOther').trim();
     const needs = d.get('needs').trim();
     const lines = ["Hi LAW7A, I'd like a free website preview.", '', `Business: ${name || '[Your business name]'}`];
-    if (industry) lines.push(`Industry: ${industry === 'Other' && otherText ? `Other (${otherText})` : industry}`);
+    if (industry) lines.push(`Industry: ${isOther() && otherText ? `Other (${otherText})` : industry}`);
     lines.push(`Package: ${d.get('pkg')}`);
     if (needs) lines.push(`What I need: ${needs}`);
     return lines.join('\n');
@@ -819,7 +819,7 @@
   }
   form.addEventListener('input', update);
   form.addEventListener('change', update);
-  form.elements.industry.addEventListener('change', () => { update(); if (isOther()) other.focus(); });
+  form.elements.industry.addEventListener('change', () => { if (isOther()) other.focus(); });
   form.addEventListener('submit', e => { e.preventDefault(); send.click(); });
   send.addEventListener('click', e => {
     const required = isOther() ? [[business, err], [other, otherErr]] : [[business, err]];
