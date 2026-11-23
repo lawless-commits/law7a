@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LAW7A — Fast-Turnaround Websites for South African Businesses</title>
+<meta name="description" content="LAW7A builds fast, mobile-first websites for South African service businesses, trades and hospitality brands. See a free preview first, launch in 2–7 days, from R500.">
+<meta name="theme-color" content="#FAF9F6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23121417'/%3E%3Crect x='7' y='7' width='6' height='6' fill='%231D4ED8'/%3E%3Ctext x='18' y='25' font-family='Arial' font-weight='700' font-size='18' fill='%23fff' text-anchor='middle'%3E7%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper: '#FAF9F6',
+          line: '#E5E4DF',
+          ink: '#121417',
+          muted: '#525866',
+          cobalt: { DEFAULT: '#1D4ED8', dark: '#1E40AF', soft: '#EEF2FF' },
+          wa: { DEFAULT: '#16A34A', dark: '#15803D' },
+        },
+        fontFamily: {
+          display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style type="text/tailwindcss">
+  @layer components {
+    .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cobalt focus-visible:ring-offset-2; }
+    .btn-primary { @apply btn bg-cobalt text-white shadow-[0_10px_30px_-12px_rgba(29,78,216,.8)] hover:bg-cobalt-dark hover:-translate-y-0.5; }
+    .btn-ghost { @apply btn border border-line bg-white text-ink hover:border-ink/30 hover:-translate-y-0.5; }
+    .btn-wa { @apply btn bg-wa text-white shadow-[0_10px_30px_-12px_rgba(22,163,74,.8)] hover:bg-wa-dark hover:-translate-y-0.5 focus-visible:ring-wa; }
+    .eyebrow { @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-muted; }
+    .h2 { @apply font-display text-[2rem] font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-4xl lg:text-5xl; }
+    .card { @apply rounded-2xl border border-line bg-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(18,20,23,.35)]; }
+    .chip { @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-2.5 py-1 font-mono text-[11px] font-medium text-ink; }
+  }
+  html { scroll-behavior: smooth; }
+  body { overflow-x: clip; }
+  [hidden] { display: none !important; }
+  section[id] { scroll-margin-top: 5rem; }
+  .grid-bg {
+    background-image: linear-gradient(to right, rgba(18,20,23,.07) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(18,20,23,.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 35%, transparent 80%);
+            mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 35%, transparent 80%);
+  }
+  .btn:hover .arrow { transform: translateX(3px); }
+  .arrow { transition: transform .2s; }
+  .js [data-reveal]:not(.in) { opacity: 0; transform: translateY(18px); }
+  [data-reveal] { transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  [data-cats]:not([hidden]) { animation: fadeUp .45s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } }
+  @keyframes float { 50% { transform: translateY(-6px); } }
+  .float { animation: float 5s ease-in-out infinite; }
+  .float-2 { animation: float 6s ease-in-out 1s infinite; }
+  dialog[open] { animation: fadeUp .3s ease; }
+  body:has(dialog[open]) { overflow: hidden; }
+  summary { list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(180deg); }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body class="bg-paper font-sans text-ink antialiased selection:bg-cobalt selection:text-white">
+
+<!-- ============ NAV ============ -->
+<header class="sticky top-0 z-40 border-b border-line/80 bg-paper/75 backdrop-blur-md">
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-8" aria-label="Main">
+    <a href="#top" class="flex items-center gap-2 font-display text-xl font-extrabold tracking-[-0.04em]" aria-label="LAW7A home">
+      <span class="grid h-7 w-7 place-items-center rounded-md bg-ink"><span class="h-2.5 w-2.5 bg-cobalt"></span></span>
+      LAW<span class="text-cobalt">7</span>A
+    </a>
+    <ul class="hidden items-center gap-8 text-sm font-medium text-muted md:flex">
+      <li><a class="transition hover:text-ink" href="#work">Work</a></li>
+      <li><a class="transition hover:text-ink" href="#process">How It Works</a></li>
+      <li><a class="transition hover:text-ink" href="#pricing">Pricing</a></li>
+      <li><a class="transition hover:text-ink" href="#faq">FAQ</a></li>
+    </ul>
+    <div class="flex items-center gap-2">
+      <a href="https://wa.me/27696985962" data-wa="Hi LAW7A, I'd like to chat about a new website for my business." target="_blank" rel="noopener" class="hidden items-center gap-2 rounded-full border border-line bg-white px-3 py-1.5 text-xs font-medium text-ink transition hover:border-wa/40 lg:inline-flex">
+        <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-wa opacity-60"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-wa"></span></span>
+        Available for new builds
+      </a>
+      <a href="#quote" class="btn-primary hidden !py-2.5 sm:inline-flex">Get a Free Preview</a>
+      <button id="menuBtn" type="button" class="grid h-10 w-10 place-items-center rounded-lg border border-line bg-white md:hidden" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+        <i data-lucide="menu" class="h-5 w-5"></i>
+      </button>
+    </div>
+  </nav>
+  <div id="mobileMenu" hidden class="border-t border-line bg-paper px-5 pb-6 pt-2 md:hidden">
+    <ul class="divide-y divide-line font-display text-lg font-bold">
+      <li><a class="block py-3" href="#work">Work</a></li>
+      <li><a class="block py-3" href="#process">How It Works</a></li>
+      <li><a class="block py-3" href="#pricing">Pricing</a></li>
+      <li><a class="block py-3" href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#quote" class="btn-primary mt-4 w-full">Get a Free Preview</a>
+    <a href="https://wa.me/27696985962" data-wa="Hi LAW7A, I'd like to chat about a new website for my business." target="_blank" rel="noopener" class="mt-3 flex items-center justify-center gap-2 text-xs font-medium text-muted">
+      <span class="h-2 w-2 rounded-full bg-wa"></span> Available for new builds · +27 69 698 5962
+    </a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="relative isolate overflow-hidden">
+  <div class="grid-bg absolute inset-0 -z-10" aria-hidden="true"></div>
+  <div class="absolute -top-40 right-0 -z-10 h-[420px] w-[620px] rounded-full bg-cobalt/10 blur-3xl" aria-hidden="true"></div>
+
+  <div class="mx-auto grid max-w-6xl items-center gap-16 px-5 pb-24 pt-12 sm:px-8 sm:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-12 lg:pb-28 lg:pt-20">
+    <div>
+      <p class="inline-flex flex-wrap items-center gap-2 rounded-full border border-line bg-white/80 px-3 py-1.5 font-mono text-[10.5px] font-medium uppercase tracking-[0.12em] text-ink sm:text-[11px]">
+        <span class="h-1.5 w-1.5 bg-cobalt"></span>Fast-Turnaround Web Design • South Africa
+      </p>
+      <h1 class="mt-6 font-display text-[2.4rem] font-extrabold leading-[1.03] tracking-[-0.04em] sm:text-6xl lg:text-[4.1rem]">
+        Websites That Turn Local Searches Into <span class="text-cobalt">Daily WhatsApp Leads.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+        We build fast, mobile-first websites for South African service businesses, trades, and hospitality brands—launched in 2 to 7 days with zero tech headaches.
+      </p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="#quote" class="btn-primary !px-6 !py-3.5 !text-[15px]">Claim Your Free Website Preview <i data-lucide="arrow-right" class="arrow h-4 w-4"></i></a>
+        <a href="#work" class="btn-ghost !px-6 !py-3.5 !text-[15px]">See Live Client Work</a>
+      </div>
+      <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-muted">
+        <li class="flex items-center gap-1.5"><i data-lucide="check" class="h-3.5 w-3.5 text-wa"></i>No upfront payment</li>
+        <li class="flex items-center gap-1.5"><i data-lucide="check" class="h-3.5 w-3.5 text-wa"></i>From R500 once-off</li>
+        <li class="flex items-center gap-1.5"><i data-lucide="check" class="h-3.5 w-3.5 text-wa"></i>Live in 2–7 days</li>
+      </ul>
+    </div>
+
+    <!-- Hero mockup -->
+    <div class="relative mx-auto w-full max-w-[560px] pb-8" aria-hidden="true">
+      <div class="rounded-2xl border border-line bg-white shadow-[0_40px_90px_-40px_rgba(18,20,23,.45)]">
+        <div class="flex items-center gap-1.5 border-b border-line px-4 py-3">
+          <span class="h-2.5 w-2.5 rounded-full bg-[#E5E4DF]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#E5E4DF]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#E5E4DF]"></span>
+          <div class="ml-3 flex flex-1 items-center gap-1.5 rounded-md bg-paper px-3 py-1 font-mono text-[11px] text-muted"><i data-lucide="lock" class="h-3 w-3"></i>yourbusiness.co.za</div>
+        </div>
+        <div class="space-y-3 p-3 sm:p-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2"><span class="h-5 w-5 rounded bg-[#EA580C]"></span><span class="h-2 w-16 rounded bg-ink/80"></span></div>
+            <div class="hidden gap-3 sm:flex"><span class="h-1.5 w-8 rounded bg-line"></span><span class="h-1.5 w-8 rounded bg-line"></span><span class="h-1.5 w-8 rounded bg-line"></span></div>
+            <span class="rounded-full bg-wa px-2.5 py-1 text-[9px] font-semibold text-white">WhatsApp</span>
+          </div>
+          <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#2a1409] via-[#6b2a0e] to-[#c2410c] p-5 sm:p-6">
+            <div class="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#fb923c]/30 blur-2xl"></div>
+            <p class="font-mono text-[9px] uppercase tracking-[0.15em] text-orange-200/80">Weddings · Functions · Year-Ends</p>
+            <p class="mt-2 max-w-[15rem] font-display text-lg font-extrabold leading-tight text-white sm:text-[1.35rem]">Spit braai catering your guests will talk about.</p>
+            <div class="mt-4 flex gap-2">
+              <span class="inline-flex items-center gap-1 rounded-md bg-wa px-2.5 py-1.5 text-[10px] font-semibold text-white"><i data-lucide="message-circle" class="h-3 w-3"></i>Get a Quote</span>
+              <span class="rounded-md border border-white/30 px-2.5 py-1.5 text-[10px] font-semibold text-white">View Menu</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="rounded-lg border border-line p-2.5"><i data-lucide="utensils" class="h-3.5 w-3.5 text-[#EA580C]"></i><p class="mt-1.5 text-[10px] font-semibold">Menu Packages</p><span class="mt-1 block h-1 w-10 rounded bg-line"></span></div>
+            <div class="rounded-lg border border-line p-2.5"><i data-lucide="calendar-check" class="h-3.5 w-3.5 text-[#EA580C]"></i><p class="mt-1.5 text-[10px] font-semibold">Book Event</p><span class="mt-1 block h-1 w-8 rounded bg-line"></span></div>
+            <div class="rounded-lg border border-line p-2.5"><i data-lucide="image" class="h-3.5 w-3.5 text-[#EA580C]"></i><p class="mt-1.5 text-[10px] font-semibold">Gallery</p><span class="mt-1 block h-1 w-9 rounded bg-line"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="absolute -bottom-2 right-2 w-[128px] rounded-[1.5rem] border-[5px] border-ink bg-white shadow-[0_30px_60px_-20px_rgba(18,20,23,.5)] sm:-right-6 sm:w-[160px]">
+        <div class="mx-auto mt-1.5 h-1.5 w-10 rounded-full bg-ink"></div>
+        <div class="space-y-2 p-2">
+          <div class="rounded-lg bg-gradient-to-br from-[#2a1409] to-[#c2410c] p-2.5">
+            <span class="block h-1.5 w-12 rounded bg-white/50"></span>
+            <p class="mt-1.5 font-display text-[10px] font-extrabold leading-tight text-white">Spit braai catering your guests will talk about.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-1.5"><span class="h-9 rounded-md bg-paper"></span><span class="h-9 rounded-md bg-paper"></span></div>
+          <span class="block h-1.5 w-3/4 rounded bg-line"></span>
+          <span class="block h-1.5 w-1/2 rounded bg-line"></span>
+          <span class="flex items-center justify-center gap-1 rounded-md bg-wa py-1.5 text-[9px] font-semibold text-white"><i data-lucide="message-circle" class="h-2.5 w-2.5"></i>Tap to WhatsApp</span>
+        </div>
+      </div>
+
+      <!-- Metric chips -->
+      <div class="float absolute -top-5 left-3 flex items-center gap-2.5 rounded-xl border border-line bg-white px-3 py-2 shadow-lg sm:-left-8">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-cobalt-soft text-cobalt"><i data-lucide="gauge" class="h-4 w-4"></i></span>
+        <div><p class="font-mono text-sm font-semibold leading-none text-cobalt">+340%</p><p class="mt-1 text-[11px] text-muted">Mobile Speed</p></div>
+      </div>
+      <div class="float-2 absolute right-3 top-[42%] hidden items-center gap-2.5 rounded-xl border border-line bg-white px-3 py-2 shadow-lg sm:-right-10 sm:flex">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-wa/10 text-wa"><i data-lucide="mouse-pointer-click" class="h-4 w-4"></i></span>
+        <div><p class="font-mono text-sm font-semibold leading-none">1-Tap</p><p class="mt-1 text-[11px] text-muted">WhatsApp Booking</p></div>
+      </div>
+      <div class="float absolute -bottom-3 left-3 flex items-center gap-2.5 rounded-xl border border-line bg-ink px-3 py-2 text-white shadow-lg sm:-left-6">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-white/10"><i data-lucide="clock" class="h-4 w-4"></i></span>
+        <div><p class="font-mono text-sm font-semibold leading-none">48-Hr</p><p class="mt-1 text-[11px] text-white/60">Turnaround</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VALUE STRIP ============ -->
+<section class="border-y border-line bg-white">
+  <div class="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-24">
+    <div class="grid gap-6 lg:grid-cols-[1fr_1.4fr] lg:items-end" data-reveal>
+      <div>
+        <p class="eyebrow"><span class="h-1.5 w-1.5 bg-cobalt"></span>Why LAW7A</p>
+        <h2 class="h2 mt-4">Built to make your phone ring—not to win design awards.</h2>
+      </div>
+      <p class="max-w-xl text-lg text-muted lg:justify-self-end">Your customers don't care about trendy animations. They want to see what you do, trust that you're legit, and reach you in one tap. That's exactly what we build.</p>
+    </div>
+
+    <div class="mt-14 grid gap-5 md:grid-cols-3">
+      <article class="card p-7" data-reveal>
+        <span class="grid h-11 w-11 place-items-center rounded-xl bg-wa/10 text-wa"><i data-lucide="smartphone" class="h-5 w-5"></i></span>
+        <h3 class="mt-6 font-display text-xl font-bold tracking-tight">Built for Mobile &amp; WhatsApp</h3>
+        <p class="mt-3 leading-relaxed text-muted">Over 80% of local customers browse on their phones. Every page is engineered for one-tap WhatsApp inquiries and instant calls.</p>
+        <p class="mt-6 border-t border-line pt-4 font-mono text-xs text-ink">80%+ · mobile-first traffic</p>
+      </article>
+      <article class="card p-7" data-reveal>
+        <span class="grid h-11 w-11 place-items-center rounded-xl bg-cobalt-soft text-cobalt"><i data-lucide="eye" class="h-5 w-5"></i></span>
+        <h3 class="mt-6 font-display text-xl font-bold tracking-tight">See It Before You Pay</h3>
+        <p class="mt-3 leading-relaxed text-muted">We build a custom working preview tailored to your business first. You only pay once you love how it looks.</p>
+        <p class="mt-6 border-t border-line pt-4 font-mono text-xs text-ink">R0 · until you approve</p>
+      </article>
+      <article class="card p-7" data-reveal>
+        <span class="grid h-11 w-11 place-items-center rounded-xl bg-orange-50 text-[#EA580C]"><i data-lucide="zap" class="h-5 w-5"></i></span>
+        <h3 class="mt-6 font-display text-xl font-bold tracking-tight">Launched in Days, Not Months</h3>
+        <p class="mt-3 leading-relaxed text-muted">No bloated agency timelines or confusing jargon. From concept to live domain in 2 to 7 days.</p>
+        <p class="mt-6 border-t border-line pt-4 font-mono text-xs text-ink">2–7 days · concept to live</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section id="work" class="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between" data-reveal>
+    <div>
+      <p class="eyebrow"><span class="h-1.5 w-1.5 bg-cobalt"></span>Selected Work</p>
+      <h2 class="h2 mt-4 max-w-2xl">Real builds for real South African businesses.</h2>
+    </div>
+    <p class="max-w-md text-muted">One live client site and two concept builds showing how we design for different local niches—each one built around a single goal: more enquiries.</p>
+  </div>
+
+  <div class="no-scrollbar -mx-5 mt-10 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:px-0" role="group" aria-label="Filter work by category">
+    <button type="button" data-filter="all" aria-pressed="true" class="shrink-0 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-muted transition hover:text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-white">All Work</button>
+    <button type="button" data-filter="hospitality" aria-pressed="false" class="shrink-0 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-muted transition hover:text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-white">Hospitality &amp; Events</button>
+    <button type="button" data-filter="electrical" aria-pressed="false" class="shrink-0 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-muted transition hover:text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-white">Trades &amp; Electrical</button>
+    <button type="button" data-filter="plumbing" aria-pressed="false" class="shrink-0 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-muted transition hover:text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-white">Plumbing &amp; Maintenance</button>
+    <button type="button" data-filter="solar" aria-pressed="false" class="shrink-0 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-muted transition hover:text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-white">Solar &amp; Renewable</button>
+  </div>
+
+  <div class="mt-8 grid grid-cols-[repeat(auto-fit,minmax(min(100%,26rem),1fr))] gap-5">
+
+    <!-- Flagship: Swiss Spit Braai -->
+    <article data-cats="hospitality" class="card col-span-full grid overflow-hidden lg:grid-cols-[1fr_1.1fr]">
+      <div class="flex flex-col p-7 sm:p-10">
+        <p class="inline-flex w-fit items-center gap-2 rounded-full bg-cobalt-soft px-3 py-1 font-mono text-[10.5px] font-semibold uppercase tracking-[0.1em] text-cobalt">
+          <span class="h-1.5 w-1.5 rounded-full bg-cobalt"></span>Live Client Build • Hospitality &amp; Events
+        </p>
+        <h3 class="mt-5 font-display text-3xl font-extrabold tracking-[-0.03em] sm:text-4xl">Swiss Spit Braai</h3>
+        <p class="mt-1 font-mono text-xs text-muted">Hospitality &amp; Catering</p>
+        <p class="mt-5 leading-relaxed text-muted">A mouth-watering, high-converting showcase built for Swiss Spit Braai—featuring interactive menu packages, event booking triggers, mobile-first gallery layouts, and instant WhatsApp quote requests.</p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="chip"><i data-lucide="message-circle" class="h-3 w-3 text-wa"></i>Instant WhatsApp Quotes</span>
+          <span class="chip"><i data-lucide="smartphone" class="h-3 w-3 text-cobalt"></i>Mobile-First Menu</span>
+          <span class="chip"><i data-lucide="gauge" class="h-3 w-3 text-[#EA580C]"></i>Fast Load Speed</span>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-3 lg:mt-auto lg:pt-8">
+          <button type="button" data-open-case class="btn-primary">Inspect Case Study <i data-lucide="arrow-up-right" class="arrow h-4 w-4"></i></button>
+        </div>
+      </div>
+      <div class="relative min-h-[300px] overflow-hidden bg-gradient-to-br from-[#2a1409] via-[#5c240c] to-[#c2410c] p-6 sm:p-10" aria-hidden="true">
+        <div class="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-[#fb923c]/30 blur-3xl"></div>
+        <div class="relative rounded-xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm">
+          <p class="font-mono text-[10px] uppercase tracking-[0.15em] text-orange-200/80">Menu Packages</p>
+          <div class="mt-3 grid grid-cols-3 gap-2">
+            <div class="rounded-lg bg-white p-2.5"><p class="text-[11px] font-bold">Classic</p><span class="mt-1.5 block h-1 w-full rounded bg-line"></span><span class="mt-1 block h-1 w-2/3 rounded bg-line"></span><span class="mt-2.5 block rounded bg-wa py-1 text-center text-[8px] font-semibold text-white">Quote</span></div>
+            <div class="rounded-lg bg-white p-2.5 ring-2 ring-[#EA580C]"><p class="text-[11px] font-bold">Premium</p><span class="mt-1.5 block h-1 w-full rounded bg-line"></span><span class="mt-1 block h-1 w-3/4 rounded bg-line"></span><span class="mt-2.5 block rounded bg-wa py-1 text-center text-[8px] font-semibold text-white">Quote</span></div>
+            <div class="rounded-lg bg-white p-2.5"><p class="text-[11px] font-bold">Feast</p><span class="mt-1.5 block h-1 w-full rounded bg-line"></span><span class="mt-1 block h-1 w-1/2 rounded bg-line"></span><span class="mt-2.5 block rounded bg-wa py-1 text-center text-[8px] font-semibold text-white">Quote</span></div>
+          </div>
+        </div>
+        <div class="relative mt-3 grid grid-cols-4 gap-2">
+          <span class="aspect-square rounded-lg bg-[#fdba74]/40"></span><span class="aspect-square rounded-lg bg-[#fb923c]/40"></span><span class="aspect-square rounded-lg bg-[#f97316]/40"></span><span class="aspect-square rounded-lg bg-[#fed7aa]/30"></span>
+        </div>
+        <div class="relative mt-3 flex items-center justify-between rounded-xl bg-white px-4 py-3">
+          <div><p class="text-xs font-bold">Planning an event?</p><p class="text-[10px] text-muted">Get a quote in minutes</p></div>
+          <span class="inline-flex items-center gap-1 rounded-lg bg-wa px-3 py-1.5 text-[10px] font-semibold text-white"><i data-lucide="message-circle" class="h-3 w-3"></i>WhatsApp</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- GAV Electrical & Solar -->
+    <article data-cats="electrical solar" class="card flex flex-col overflow-hidden">
+      <div class="relative bg-[#0f172a] p-6" aria-hidden="true">
+        <div class="flex items-center justify-between rounded-lg bg-[#DC2626] px-3 py-2 text-white">
+          <span class="flex items-center gap-1.5 text-[11px] font-bold"><i data-lucide="siren" class="h-3.5 w-3.5"></i>24/7 Emergency Callout</span>
+          <span class="rounded bg-white px-2 py-0.5 text-[9px] font-bold text-[#DC2626]">CALL NOW</span>
+        </div>
+        <p class="mt-4 max-w-[16rem] font-display text-lg font-extrabold leading-tight text-white">Power &amp; solar you can count on.</p>
+        <div class="mt-4 grid grid-cols-3 gap-2">
+          <span class="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-1.5 text-[9px] text-white/80"><i data-lucide="map-pin" class="h-2.5 w-2.5 text-[#FACC15]"></i>Area</span>
+          <span class="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-1.5 text-[9px] text-white/80"><i data-lucide="map-pin" class="h-2.5 w-2.5 text-[#FACC15]"></i>Area</span>
+          <span class="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-1.5 text-[9px] text-white/80"><i data-lucide="map-pin" class="h-2.5 w-2.5 text-[#FACC15]"></i>Area</span>
+          <span class="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-1.5 text-[9px] text-white/80"><i data-lucide="sun" class="h-2.5 w-2.5 text-[#FACC15]"></i>Solar</span>
+          <span class="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-1.5 text-[9px] text-white/80"><i data-lucide="plug-zap" class="h-2.5 w-2.5 text-[#FACC15]"></i>COCs</span>
+          <span class="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-1.5 text-[9px] text-white/80"><i data-lucide="zap" class="h-2.5 w-2.5 text-[#FACC15]"></i>Repairs</span>
+        </div>
+      </div>
+      <div class="flex flex-1 flex-col p-7">
+        <p class="font-mono text-[10.5px] font-semibold uppercase tracking-[0.1em] text-muted">Concept Build • Trades &amp; Renewable Energy</p>
+        <h3 class="mt-3 font-display text-2xl font-extrabold tracking-[-0.02em]">GAV Electrical &amp; Solar</h3>
+        <p class="mt-3 leading-relaxed text-muted">An emergency callout banner that's always one tap away, plus a service-area grid so homeowners instantly know you cover their suburb—before they ever pick up the phone.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="chip">Emergency Callout</span><span class="chip">Service-Area Grid</span><span class="chip">Solar Enquiries</span>
+        </div>
+        <a href="https://wa.me/27696985962" data-wa="Hi LAW7A, I run an electrical / solar business and I'd like a website like the GAV Electrical & Solar concept." target="_blank" rel="noopener" class="mt-auto inline-flex items-center gap-1.5 pt-7 text-sm font-semibold text-cobalt hover:underline">Get a build like this <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+      </div>
+    </article>
+
+    <!-- Water Boys Plumbing -->
+    <article data-cats="plumbing" class="card flex flex-col overflow-hidden">
+      <div class="relative bg-[#EFF6FF] p-6" aria-hidden="true">
+        <div class="flex items-center justify-between">
+          <span class="flex items-center gap-1.5 text-[11px] font-bold text-[#1E3A8A]"><i data-lucide="droplets" class="h-3.5 w-3.5"></i>Water Boys</span>
+          <span class="rounded-full bg-[#1E3A8A] px-2.5 py-1 text-[9px] font-semibold text-white">24/7</span>
+        </div>
+        <p class="mt-4 max-w-[16rem] font-display text-lg font-extrabold leading-tight text-[#0B1B3F]">Burst pipe? We're on our way.</p>
+        <span class="mt-4 flex items-center justify-center gap-1.5 rounded-lg bg-[#DC2626] py-2.5 text-[11px] font-bold text-white shadow-md"><i data-lucide="siren" class="h-3.5 w-3.5"></i>Request Urgent Dispatch</span>
+        <div class="mt-3 grid grid-cols-3 gap-2">
+          <span class="flex flex-col items-center gap-1 rounded-md bg-white py-2 text-[9px] font-semibold text-[#1E3A8A]"><i data-lucide="shield-check" class="h-3.5 w-3.5"></i>Registered</span>
+          <span class="flex flex-col items-center gap-1 rounded-md bg-white py-2 text-[9px] font-semibold text-[#1E3A8A]"><i data-lucide="badge-check" class="h-3.5 w-3.5"></i>Guaranteed</span>
+          <span class="flex flex-col items-center gap-1 rounded-md bg-white py-2 text-[9px] font-semibold text-[#1E3A8A]"><i data-lucide="star" class="h-3.5 w-3.5"></i>Reviews</span>
+        </div>
+      </div>
+      <div class="flex flex-1 flex-col p-7">
+        <p class="font-mono text-[10.5px] font-semibold uppercase tracking-[0.1em] text-muted">Concept Build • 24/7 Maintenance</p>
+        <h3 class="mt-3 font-display text-2xl font-extrabold tracking-[-0.02em]">Water Boys Plumbing</h3>
+        <p class="mt-3 leading-relaxed text-muted">Designed for panicked, phone-in-hand customers: an urgent dispatch button above the fold and a trust-badge row that answers "can I rely on these guys?" in two seconds.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="chip">Urgent Dispatch</span><span class="chip">Trust Badges</span><span class="chip">Click-to-Call</span>
+        </div>
+        <a href="https://wa.me/27696985962" data-wa="Hi LAW7A, I run a plumbing / maintenance business and I'd like a website like the Water Boys Plumbing concept." target="_blank" rel="noopener" class="mt-auto inline-flex items-center gap-1.5 pt-7 text-sm font-semibold text-cobalt hover:underline">Get a build like this <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section id="process" class="relative overflow-hidden bg-ink text-white">
+  <div class="grid-bg absolute inset-0 opacity-[0.15] invert" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
+    <div class="max-w-2xl" data-reveal>
+      <p class="eyebrow !text-white/60"><span class="h-1.5 w-1.5 bg-cobalt"></span>How It Works</p>
+      <h2 class="h2 mt-4">The 3-step, zero-stress process.</h2>
+      <p class="mt-5 text-lg text-white/60">No meetings, no jargon, no 40-page proposals. Just a WhatsApp chat and a website you can see before you spend a cent.</p>
+    </div>
+    <ol class="mt-14 grid gap-5 md:grid-cols-3">
+      <li class="rounded-2xl border border-white/10 bg-white/[0.04] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25" data-reveal>
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-4xl font-medium text-cobalt">01</span>
+          <i data-lucide="sparkles" class="h-5 w-5 text-white/40"></i>
+        </div>
+        <h3 class="mt-8 font-display text-xl font-bold">Free Custom Preview</h3>
+        <p class="mt-3 leading-relaxed text-white/60">Tell us your business name and services. We design a tailored preview so you can see your new site in action before committing.</p>
+      </li>
+      <li class="rounded-2xl border border-white/10 bg-white/[0.04] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25" data-reveal>
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-4xl font-medium text-cobalt">02</span>
+          <i data-lucide="pencil-ruler" class="h-5 w-5 text-white/40"></i>
+        </div>
+        <h3 class="mt-8 font-display text-xl font-bold">Refine &amp; Customize</h3>
+        <p class="mt-3 leading-relaxed text-white/60">Review the preview on your phone. Tell us what text, photos, or pricing details you want tweaked.</p>
+      </li>
+      <li class="rounded-2xl border border-white/10 bg-white/[0.04] p-7 transition duration-300 hover:-translate-y-1 hover:border-white/25" data-reveal>
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-4xl font-medium text-cobalt">03</span>
+          <i data-lucide="rocket" class="h-5 w-5 text-white/40"></i>
+        </div>
+        <h3 class="mt-8 font-display text-xl font-bold">Launch &amp; Get Leads</h3>
+        <p class="mt-3 leading-relaxed text-white/60">We connect your domain, optimize for local Google searches, and hook up direct WhatsApp lead buttons.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing" class="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-2xl text-center" data-reveal>
+    <p class="eyebrow"><span class="h-1.5 w-1.5 bg-cobalt"></span>Transparent Pricing</p>
+    <h2 class="h2 mt-4">R500 – R1,500. Once-off. No retainers.</h2>
+    <p class="mt-5 text-lg text-muted">You pay for what you actually need done—no monthly agency fees, no surprise invoices, no lock-in.</p>
+  </div>
+
+  <div class="mt-14 grid items-stretch gap-5 lg:grid-cols-3">
+    <!-- Starter -->
+    <article class="card flex flex-col p-7 sm:p-8" data-reveal>
+      <p class="font-display text-lg font-bold">Starter Launchpad</p>
+      <p class="mt-1 text-sm text-muted">Best for solo operators &amp; getting online fast</p>
+      <p class="mt-7 flex items-baseline gap-2"><span class="font-mono text-5xl font-semibold tracking-tight">R500</span><span class="font-mono text-xs text-muted">once-off</span></p>
+      <ul class="mt-7 space-y-3 border-t border-line pt-7 text-sm">
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-cobalt"></i>High-converting single-page website</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-cobalt"></i>Mobile-responsive layout</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-cobalt"></i>Direct WhatsApp click-to-chat integration</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-cobalt"></i>Service overview &amp; contact section</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-cobalt"></i>48-hour turnaround</li>
+      </ul>
+      <a href="#quote" data-pkg="Starter (R500)" class="btn-ghost mt-auto w-full !mt-9">Start with Starter</a>
+    </article>
+
+    <!-- Growth -->
+    <article class="relative flex flex-col rounded-2xl bg-ink p-7 text-white shadow-[0_40px_80px_-40px_rgba(29,78,216,.7)] ring-1 ring-ink transition duration-300 hover:-translate-y-1 sm:p-8 lg:-my-4 lg:py-12" data-reveal>
+      <span class="absolute -top-3 left-7 rounded-full bg-cobalt px-3 py-1 font-mono text-[10.5px] font-semibold uppercase tracking-[0.1em]">Most Popular</span>
+      <p class="font-display text-lg font-bold">Business Growth</p>
+      <p class="mt-1 text-sm text-white/60">Best for established service &amp; hospitality businesses</p>
+      <p class="mt-7 flex items-baseline gap-2"><span class="font-mono text-5xl font-semibold tracking-tight">R1,000</span><span class="font-mono text-xs text-white/50">once-off</span></p>
+      <ul class="mt-7 space-y-3 border-t border-white/10 pt-7 text-sm text-white/90">
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-[#60A5FA]"></i>Multi-section custom design</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-[#60A5FA]"></i>Interactive photo gallery / menu showcase</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-[#60A5FA]"></i>Customer review highlights</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-[#60A5FA]"></i>Local SEO fundamentals</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-[#60A5FA]"></i>Custom WhatsApp quote pre-fill</li>
+      </ul>
+      <a href="#quote" data-pkg="Growth (R1,000)" class="btn-primary mt-auto w-full !mt-9 focus-visible:ring-offset-ink">Choose Growth <i data-lucide="arrow-right" class="arrow h-4 w-4"></i></a>
+    </article>
+
+    <!-- Pro -->
+    <article class="card flex flex-col p-7 sm:p-8" data-reveal>
+      <p class="font-display text-lg font-bold">Full Custom Pro</p>
+      <p class="mt-1 text-sm text-muted">Best for companies wanting maximum trust &amp; features</p>
+      <p class="mt-7 flex items-baseline gap-2"><span class="font-mono text-5xl font-semibold tracking-tight">R1,500</span><span class="font-mono text-xs text-muted">once-off</span></p>
+      <ul class="mt-7 space-y-3 border-t border-line pt-7 text-sm">
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-cobalt"></i>Multi-page or advanced interactive layout</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-cobalt"></i>Custom quote / booking calculator</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-cobalt"></i>Google Maps &amp; service-area integration</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-cobalt"></i>Priority 7-day full build</li>
+        <li class="flex gap-3"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-cobalt"></i>Launch support</li>
+      </ul>
+      <a href="#quote" data-pkg="Custom Pro (R1,500)" class="btn-ghost mt-auto w-full !mt-9">Go Custom Pro</a>
+    </article>
+  </div>
+
+  <p class="mx-auto mt-12 flex max-w-2xl items-start justify-center gap-3 text-center text-sm text-muted" data-reveal>
+    <i data-lucide="info" class="mt-0.5 h-4 w-4 shrink-0 text-cobalt"></i>
+    <span>Final pricing depends on the exact pages and features you want done. Start with a free preview first—pay only when you're ready to launch.</span>
+  </p>
+</section>
+
+<!-- ============ QUOTE BUILDER ============ -->
+<section id="quote" class="border-y border-line bg-white">
+  <div class="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:py-28">
+    <div data-reveal>
+      <p class="eyebrow"><span class="h-1.5 w-1.5 bg-cobalt"></span>Instant WhatsApp Quote &amp; Preview</p>
+      <h2 class="h2 mt-4">Request your free preview in 30 seconds.</h2>
+      <p class="mt-5 max-w-lg text-lg text-muted">No forms that disappear into an inbox. Fill in the basics, check your message, and send it straight to our WhatsApp.</p>
+
+      <form id="builder" class="mt-10 space-y-6" novalidate>
+        <div>
+          <label for="business" class="text-sm font-semibold">Business Name <span class="text-cobalt">*</span></label>
+          <input id="business" name="business" type="text" autocomplete="organization" maxlength="80" placeholder="e.g. Swiss Spit Braai" aria-describedby="businessErr"
+            class="mt-2 w-full rounded-xl border border-line bg-paper px-4 py-3 text-base outline-none transition placeholder:text-muted/60 focus:border-cobalt focus:bg-white focus:ring-4 focus:ring-cobalt/10 aria-[invalid=true]:border-red-500">
+          <p id="businessErr" hidden class="mt-2 flex items-center gap-1.5 text-sm text-red-600"><i data-lucide="alert-circle" class="h-4 w-4"></i>Add your business name so we know who we're building for.</p>
+        </div>
+
+        <div>
+          <label for="industry" class="text-sm font-semibold">Industry / Niche</label>
+          <div class="relative mt-2">
+            <select id="industry" name="industry" class="w-full appearance-none rounded-xl border border-line bg-paper px-4 py-3 pr-10 text-base outline-none transition focus:border-cobalt focus:bg-white focus:ring-4 focus:ring-cobalt/10">
+              <option value="">Select your industry</option>
+              <option>Hospitality / Catering</option>
+              <option>Plumbing</option>
+              <option>Electrical</option>
+              <option>Solar / Renewable</option>
+              <option>Construction / Trades</option>
+              <option>Other</option>
+            </select>
+            <i data-lucide="chevron-down" class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"></i>
+          </div>
+        </div>
+
+        <fieldset>
+          <legend class="text-sm font-semibold">Package Interest</legend>
+          <div class="mt-2 flex flex-wrap gap-2">
+            <label><input type="radio" name="pkg" value="Starter (R500)" class="peer sr-only"><span class="inline-block cursor-pointer rounded-full border border-line bg-paper px-4 py-2 text-sm font-medium text-muted transition hover:border-ink/30 peer-checked:border-cobalt peer-checked:bg-cobalt peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-cobalt peer-focus-visible:ring-offset-2">Starter <span class="font-mono text-xs">R500</span></span></label>
+            <label><input type="radio" name="pkg" value="Growth (R1,000)" class="peer sr-only"><span class="inline-block cursor-pointer rounded-full border border-line bg-paper px-4 py-2 text-sm font-medium text-muted transition hover:border-ink/30 peer-checked:border-cobalt peer-checked:bg-cobalt peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-cobalt peer-focus-visible:ring-offset-2">Growth <span class="font-mono text-xs">R1,000</span></span></label>
+            <label><input type="radio" name="pkg" value="Custom Pro (R1,500)" class="peer sr-only"><span class="inline-block cursor-pointer rounded-full border border-line bg-paper px-4 py-2 text-sm font-medium text-muted transition hover:border-ink/30 peer-checked:border-cobalt peer-checked:bg-cobalt peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-cobalt peer-focus-visible:ring-offset-2">Custom Pro <span class="font-mono text-xs">R1,500</span></span></label>
+            <label><input type="radio" name="pkg" value="Not sure yet" class="peer sr-only" checked><span class="inline-block cursor-pointer rounded-full border border-line bg-paper px-4 py-2 text-sm font-medium text-muted transition hover:border-ink/30 peer-checked:border-cobalt peer-checked:bg-cobalt peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-cobalt peer-focus-visible:ring-offset-2">Not Sure Yet</span></label>
+          </div>
+        </fieldset>
+
+        <div>
+          <label for="needs" class="text-sm font-semibold">What do you need done? <span class="font-normal text-muted">(optional)</span></label>
+          <textarea id="needs" name="needs" rows="3" maxlength="500" placeholder="e.g. A site that shows our braai packages and lets people request quotes for weddings."
+            class="mt-2 w-full resize-y rounded-xl border border-line bg-paper px-4 py-3 text-base outline-none transition placeholder:text-muted/60 focus:border-cobalt focus:bg-white focus:ring-4 focus:ring-cobalt/10"></textarea>
+        </div>
+      </form>
+    </div>
+
+    <!-- Live WhatsApp preview -->
+    <div class="lg:sticky lg:top-24 lg:self-start" data-reveal>
+      <p class="mb-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Live message preview</p>
+      <div class="overflow-hidden rounded-2xl border border-line shadow-[0_30px_70px_-40px_rgba(18,20,23,.45)]">
+        <div class="flex items-center gap-3 bg-[#075E54] px-4 py-3 text-white">
+          <span class="grid h-10 w-10 place-items-center rounded-full bg-white font-display text-sm font-extrabold text-ink">L<span class="text-cobalt">7</span></span>
+          <div class="min-w-0">
+            <p class="font-semibold leading-tight">LAW7A</p>
+            <p class="font-mono text-xs text-white/70">+27 69 698 5962</p>
+          </div>
+          <span class="ml-auto inline-flex items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-1 text-[11px]"><span class="h-1.5 w-1.5 rounded-full bg-[#4ADE80]"></span>Online</span>
+        </div>
+        <div class="min-h-[260px] bg-[#EFEAE2] p-4 sm:p-5">
+          <p class="mx-auto mb-4 w-fit rounded-md bg-white/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-muted">Today</p>
+          <div class="ml-auto max-w-[92%] rounded-xl rounded-tr-sm bg-[#D9FDD3] px-3.5 py-2.5 shadow-sm">
+            <p id="waPreview" class="whitespace-pre-wrap break-words text-[14px] leading-relaxed text-ink"></p>
+            <p class="mt-1 flex items-center justify-end gap-1 font-mono text-[10px] text-muted">now <i data-lucide="check-check" class="h-3.5 w-3.5 text-[#53BDEB]"></i></p>
+          </div>
+        </div>
+        <div class="bg-white p-4">
+          <a id="waSend" href="https://wa.me/27696985962" target="_blank" rel="noopener" class="btn-wa w-full !py-3.5 !text-[15px]">
+            <i data-lucide="send" class="h-4 w-4"></i>Send via WhatsApp <i data-lucide="arrow-right" class="arrow h-4 w-4"></i>
+          </a>
+          <p class="mt-3 text-center text-xs text-muted">Opens WhatsApp with this message ready to send. Nothing is sent until you tap send.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1.5fr] lg:py-28">
+  <div data-reveal>
+    <p class="eyebrow"><span class="h-1.5 w-1.5 bg-cobalt"></span>FAQ</p>
+    <h2 class="h2 mt-4">Straight answers. No fine print.</h2>
+    <p class="mt-5 text-muted">Got a question that isn't here? Ask us on WhatsApp—a real person replies, not a bot.</p>
+    <a href="https://wa.me/27696985962" data-wa="Hi LAW7A, I have a quick question about getting a website." target="_blank" rel="noopener" class="btn-ghost mt-6"><i data-lucide="message-circle" class="h-4 w-4 text-wa"></i>Ask a question</a>
+  </div>
+
+  <div class="divide-y divide-line border-y border-line" data-reveal>
+    <details name="faq" class="group" open>
+      <summary class="flex cursor-pointer items-center justify-between gap-6 py-6 font-display text-lg font-bold tracking-tight transition hover:text-cobalt">
+        Why are your prices so affordable compared to big agencies?
+        <i data-lucide="chevron-down" class="chev h-5 w-5 shrink-0 text-muted transition-transform duration-300"></i>
+      </summary>
+      <p class="-mt-1 pb-6 pr-10 leading-relaxed text-muted">Because you're not paying for account managers, boardroom meetings, or a fancy office. We're a lean studio with a proven build process designed specifically for local service businesses, so our time goes into your design and your copy—not into reinventing the basics. You get a professional, fast website without the agency markup. Any third-party costs, like registering a new domain name, are explained upfront before you pay anything.</p>
+    </details>
+    <details name="faq" class="group">
+      <summary class="flex cursor-pointer items-center justify-between gap-6 py-6 font-display text-lg font-bold tracking-tight transition hover:text-cobalt">
+        How does the free preview work?
+        <i data-lucide="chevron-down" class="chev h-5 w-5 shrink-0 text-muted transition-transform duration-300"></i>
+      </summary>
+      <p class="-mt-1 pb-6 pr-10 leading-relaxed text-muted">Send us your business name and what you offer on WhatsApp. We design a working preview of your website and send you a link you can open on your own phone. If you love it, we refine it and launch. If it's not for you, you walk away—no payment, no obligation, no awkward follow-ups.</p>
+    </details>
+    <details name="faq" class="group">
+      <summary class="flex cursor-pointer items-center justify-between gap-6 py-6 font-display text-lg font-bold tracking-tight transition hover:text-cobalt">
+        What do you need from me to get started?
+        <i data-lucide="chevron-down" class="chev h-5 w-5 shrink-0 text-muted transition-transform duration-300"></i>
+      </summary>
+      <p class="-mt-1 pb-6 pr-10 leading-relaxed text-muted">Just the basics: your business name, the services you offer, the areas you work in, and the number customers should WhatsApp or call. If you have a logo, photos of your work, or prices you'd like shown, send those too. Don't have a logo or great photos yet? No problem—we'll design around what you've got.</p>
+    </details>
+    <details name="faq" class="group">
+      <summary class="flex cursor-pointer items-center justify-between gap-6 py-6 font-display text-lg font-bold tracking-tight transition hover:text-cobalt">
+        How fast will my website be live?
+        <i data-lucide="chevron-down" class="chev h-5 w-5 shrink-0 text-muted transition-transform duration-300"></i>
+      </summary>
+      <p class="-mt-1 pb-6 pr-10 leading-relaxed text-muted">Starter sites can be live within 48 hours. Most Growth and Custom Pro builds launch within 2 to 7 days. The biggest factor is how quickly you send feedback and content—the faster you reply on WhatsApp, the faster you're live and taking enquiries.</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-ink text-white">
+  <div class="mx-auto max-w-6xl px-5 pt-20 sm:px-8">
+    <div class="flex flex-col gap-8 border-b border-white/10 pb-16 lg:flex-row lg:items-end lg:justify-between">
+      <h2 class="max-w-2xl font-display text-4xl font-extrabold leading-[1.05] tracking-[-0.035em] sm:text-5xl">Ready to see your new website—before you pay for it?</h2>
+      <a href="#quote" class="btn-primary shrink-0 !px-6 !py-3.5 !text-[15px] focus-visible:ring-offset-ink">Claim Your Free Preview <i data-lucide="arrow-right" class="arrow h-4 w-4"></i></a>
+    </div>
+
+    <div class="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr]">
+      <div>
+        <a href="#top" class="flex items-center gap-2 font-display text-3xl font-extrabold tracking-[-0.04em]">
+          <span class="grid h-9 w-9 place-items-center rounded-lg bg-white"><span class="h-3 w-3 bg-cobalt"></span></span>
+          LAW<span class="text-[#60A5FA]">7</span>A
+        </a>
+        <p class="mt-4 max-w-xs text-sm leading-relaxed text-white/60">Fast-turnaround websites for South African service businesses, trades, hospitality and event companies.</p>
+        <p class="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-white/80"><i data-lucide="map-pin" class="h-3.5 w-3.5 text-[#60A5FA]"></i>Serving all of South Africa</p>
+      </div>
+      <nav aria-label="Footer">
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-white/40">Navigate</p>
+        <ul class="mt-4 space-y-2.5 text-sm text-white/80">
+          <li><a class="hover:text-white" href="#work">Work</a></li>
+          <li><a class="hover:text-white" href="#process">How It Works</a></li>
+          <li><a class="hover:text-white" href="#pricing">Pricing</a></li>
+          <li><a class="hover:text-white" href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-white/40">Contact</p>
+        <a href="https://wa.me/27696985962" data-wa="Hi LAW7A, I'd like to chat about a new website for my business." target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-sm font-semibold hover:text-[#4ADE80]">
+          <i data-lucide="message-circle" class="h-4 w-4 text-[#4ADE80]"></i>WhatsApp <span class="font-mono font-normal">+27 69 698 5962</span>
+        </a>
+        <p class="mt-3 flex items-center gap-2 text-sm text-white/60"><span class="h-2 w-2 rounded-full bg-wa"></span>Available for new builds</p>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2 border-t border-white/10 py-6 font-mono text-xs text-white/40 sm:flex-row sm:justify-between">
+      <p>© 2026 LAW7A. All rights reserved.</p>
+      <p>Designed &amp; built in South Africa.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ CASE STUDY MODAL ============ -->
+<dialog id="caseModal" aria-labelledby="caseTitle" class="m-auto w-[calc(100%-2rem)] max-w-2xl rounded-2xl border border-line bg-white p-0 text-ink shadow-2xl backdrop:bg-ink/60 backdrop:backdrop-blur-sm">
+  <div class="relative bg-gradient-to-br from-[#2a1409] via-[#5c240c] to-[#c2410c] p-7 text-white sm:p-9">
+    <button type="button" data-close class="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-white/10 transition hover:bg-white/20" aria-label="Close case study"><i data-lucide="x" class="h-4 w-4"></i></button>
+    <p class="font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-orange-200/90">Case Study • Live Client Build</p>
+    <h2 id="caseTitle" class="mt-3 font-display text-3xl font-extrabold tracking-[-0.03em] sm:text-4xl">Swiss Spit Braai</h2>
+    <p class="mt-2 max-w-md text-white/75">How we turned a catering menu into a quote-request machine that works on any phone.</p>
+  </div>
+
+  <div class="space-y-9 p-7 sm:p-9">
+    <div>
+      <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">The Brief</p>
+      <p class="mt-3 leading-relaxed text-muted">Catering sells on appetite and trust. People planning weddings, birthdays and year-end functions want to see the food, understand what each package includes, and get a price fast—almost always from their phone. The site needed to do all three without a single dead end.</p>
+    </div>
+
+    <div>
+      <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Design Decisions</p>
+      <ul class="mt-4 space-y-4">
+        <li class="flex gap-4"><span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-orange-50 text-[#EA580C]"><i data-lucide="flame" class="h-4 w-4"></i></span><div><p class="font-semibold">Warm, ember-toned palette</p><p class="mt-1 text-sm text-muted">Rich fire-and-smoke colours and big food imagery sell the experience in the very first screen.</p></div></li>
+        <li class="flex gap-4"><span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-cobalt-soft text-cobalt"><i data-lucide="utensils" class="h-4 w-4"></i></span><div><p class="font-semibold">Packages as tap-friendly cards</p><p class="mt-1 text-sm text-muted">Each menu package shows what's included at a glance, so customers choose before they message—fewer back-and-forth questions.</p></div></li>
+        <li class="flex gap-4"><span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-wa/10 text-wa"><i data-lucide="smartphone" class="h-4 w-4"></i></span><div><p class="font-semibold">Thumb-first layout</p><p class="mt-1 text-sm text-muted">Large type, high contrast and big buttons that stay readable outdoors and easy to tap one-handed.</p></div></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Layout Structure</p>
+      <ol class="mt-4 grid gap-2 font-mono text-sm sm:grid-cols-2">
+        <li class="flex gap-3 rounded-lg border border-line px-3 py-2.5"><span class="text-cobalt">01</span>Hero + instant quote button</li>
+        <li class="flex gap-3 rounded-lg border border-line px-3 py-2.5"><span class="text-cobalt">02</span>Menu packages</li>
+        <li class="flex gap-3 rounded-lg border border-line px-3 py-2.5"><span class="text-cobalt">03</span>Events we cater</li>
+        <li class="flex gap-3 rounded-lg border border-line px-3 py-2.5"><span class="text-cobalt">04</span>Mobile-first gallery</li>
+        <li class="flex gap-3 rounded-lg border border-line px-3 py-2.5"><span class="text-cobalt">05</span>How booking works</li>
+        <li class="flex gap-3 rounded-lg border border-line px-3 py-2.5"><span class="text-cobalt">06</span>WhatsApp quote &amp; contact</li>
+      </ol>
+    </div>
+
+    <div>
+      <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Conversion Features</p>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="chip"><i data-lucide="message-circle" class="h-3 w-3 text-wa"></i>Pre-filled WhatsApp quote per package</span>
+        <span class="chip"><i data-lucide="calendar-check" class="h-3 w-3 text-cobalt"></i>Event booking triggers after every section</span>
+        <span class="chip"><i data-lucide="mouse-pointer-click" class="h-3 w-3 text-cobalt"></i>Sticky mobile quote button</span>
+        <span class="chip"><i data-lucide="gauge" class="h-3 w-3 text-[#EA580C]"></i>Lightweight images for mobile data</span>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-3 rounded-2xl bg-paper p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="font-display font-bold">Want something like this for your business?</p>
+        <p class="text-sm text-muted">Get a free preview—pay only if you love it.</p>
+      </div>
+      <a href="https://wa.me/27696985962" data-wa="Hi LAW7A, I saw the Swiss Spit Braai case study and I'd like a similar website for my business." target="_blank" rel="noopener" class="btn-wa shrink-0"><i data-lucide="message-circle" class="h-4 w-4"></i>WhatsApp Us</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  // Reveal first, so a failed icon CDN can never leave content invisible.
+  const reveals = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => io.observe(el));
+  } else reveals.forEach(el => el.classList.add('in'));
+
+  window.lucide?.createIcons();
+
+  // WhatsApp links
+  const WA = 'https://wa.me/27696985962';
+  const waUrl = text => `${WA}?text=${encodeURIComponent(text)}`;
+  console.assert(new URL(waUrl('R1,000 & more\n#ok')).searchParams.get('text') === 'R1,000 & more\n#ok', 'waUrl encoding');
+  document.querySelectorAll('[data-wa]').forEach(a => { a.href = waUrl(a.dataset.wa); });
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  const setMenu = open => {
+    menu.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  menuBtn.addEventListener('click', () => setMenu(menu.hidden));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+
+  // Portfolio filters
+  const tabs = [...document.querySelectorAll('[data-filter]')];
+  const cards = [...document.querySelectorAll('[data-cats]')];
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    const f = tab.dataset.filter;
+    tabs.forEach(t => t.setAttribute('aria-pressed', t === tab));
+    cards.forEach(c => { c.hidden = f !== 'all' && !c.dataset.cats.split(' ').includes(f); });
+  }));
+
+  // Case study modal (Esc closes natively; click on backdrop or X closes too)
+  const modal = document.getElementById('caseModal');
+  document.querySelectorAll('[data-open-case]').forEach(b => b.addEventListener('click', () => modal.showModal()));
+  modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('[data-close]')) modal.close(); });
+
+  // Quote builder
+  const form = document.getElementById('builder');
+  const business = form.elements.business;
+  const preview = document.getElementById('waPreview');
+  const send = document.getElementById('waSend');
+  const err = document.getElementById('businessErr');
+
+  function buildMessage() {
+    const d = new FormData(form);
+    const name = d.get('business').trim();
+    const industry = d.get('industry');
+    const needs = d.get('needs').trim();
+    const lines = ["Hi LAW7A, I'd like a free website preview.", '', `Business: ${name || '[Your business name]'}`];
+    if (industry) lines.push(`Industry: ${industry}`);
+    lines.push(`Package: ${d.get('pkg')}`);
+    if (needs) lines.push(`What I need: ${needs}`);
+    return lines.join('\n');
+  }
+  function update() {
+    const msg = buildMessage();
+    preview.textContent = msg;
+    send.href = waUrl(msg);
+    if (business.value.trim()) { err.hidden = true; business.removeAttribute('aria-invalid'); }
+  }
+  form.addEventListener('input', update);
+  form.addEventListener('change', update);
+  form.addEventListener('submit', e => { e.preventDefault(); send.click(); });
+  send.addEventListener('click', e => {
+    if (business.value.trim()) return;
+    e.preventDefault();
+    err.hidden = false;
+    business.setAttribute('aria-invalid', 'true');
+    business.focus();
+  });
+  document.querySelectorAll('[data-pkg]').forEach(a => a.addEventListener('click', () => {
+    form.querySelector(`input[name="pkg"][value="${a.dataset.pkg}"]`).checked = true;
+    update();
+  }));
+  update();
+</script>
+</body>
+</html>
