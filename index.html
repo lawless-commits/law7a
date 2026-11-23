@@ -70,6 +70,12 @@
   summary { list-style: none; }
   summary::-webkit-details-marker { display: none; }
   details[open] .chev { transform: rotate(180deg); }
+  /* Star rating: inputs are in 5→1 order and row-reversed, so `~` lights every lower star. */
+  .stars label { cursor: pointer; color: #D6D3CC; transition: color .15s, transform .15s; }
+  .stars label:hover { transform: scale(1.1); }
+  .stars svg { fill: currentColor; }
+  .stars input:checked ~ label, .stars label:hover, .stars label:hover ~ label { color: #F59E0B; }
+  .stars input:focus-visible + label { outline: 2px solid #1D4ED8; outline-offset: 2px; border-radius: 6px; }
   .no-scrollbar { scrollbar-width: none; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   @media (prefers-reduced-motion: reduce) {
@@ -533,6 +539,61 @@
   </div>
 </section>
 
+<!-- ============ REVIEWS ============ -->
+<section id="reviews" class="border-b border-line">
+  <div class="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:py-28">
+    <div data-reveal>
+      <p class="eyebrow"><span class="h-1.5 w-1.5 bg-cobalt"></span>Client Reviews</p>
+      <h2 class="h2 mt-4">Don’t take our word for it.</h2>
+      <p class="mt-5 max-w-lg text-lg text-muted">Every review on this page comes from a real LAW7A client. We check each one before it goes up—no fakes, no paid praise.</p>
+      <div id="reviewList" class="mt-10 grid gap-4 sm:grid-cols-2"></div>
+      <div id="reviewEmpty" class="mt-10 rounded-2xl border border-dashed border-line bg-white p-8 text-center">
+        <span class="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-cobalt-soft text-cobalt"><i data-lucide="quote" class="h-5 w-5"></i></span>
+        <p class="mt-4 font-display text-lg font-bold">Our first reviews are on their way.</p>
+        <p class="mt-1 text-sm text-muted">Worked with us? Be the first to share how it went.</p>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-line bg-white p-7 sm:p-8 lg:self-start" data-reveal>
+      <h3 class="font-display text-2xl font-extrabold tracking-[-0.02em]">Leave a review</h3>
+      <p class="mt-2 text-sm text-muted">Takes a minute. Your review is sent to us on WhatsApp and published once we've confirmed you're a client.</p>
+
+      <form id="reviewForm" class="mt-7 space-y-5" novalidate>
+        <fieldset>
+          <legend class="text-sm font-semibold">Your rating <span class="text-cobalt">*</span></legend>
+          <div class="stars mt-2 flex flex-row-reverse justify-end gap-1">
+            <input type="radio" id="r5" name="rating" value="5" class="sr-only"><label for="r5"><span class="sr-only">5 stars</span><i data-lucide="star" class="h-8 w-8"></i></label>
+            <input type="radio" id="r4" name="rating" value="4" class="sr-only"><label for="r4"><span class="sr-only">4 stars</span><i data-lucide="star" class="h-8 w-8"></i></label>
+            <input type="radio" id="r3" name="rating" value="3" class="sr-only"><label for="r3"><span class="sr-only">3 stars</span><i data-lucide="star" class="h-8 w-8"></i></label>
+            <input type="radio" id="r2" name="rating" value="2" class="sr-only"><label for="r2"><span class="sr-only">2 stars</span><i data-lucide="star" class="h-8 w-8"></i></label>
+            <input type="radio" id="r1" name="rating" value="1" class="sr-only"><label for="r1"><span class="sr-only">1 star</span><i data-lucide="star" class="h-8 w-8"></i></label>
+          </div>
+        </fieldset>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="rName" class="text-sm font-semibold">Your name <span class="text-cobalt">*</span></label>
+            <input id="rName" name="name" type="text" autocomplete="name" maxlength="60" placeholder="e.g. Thandi M."
+              class="mt-2 w-full rounded-xl border border-line bg-paper px-4 py-3 text-base outline-none transition placeholder:text-muted/60 focus:border-cobalt focus:bg-white focus:ring-4 focus:ring-cobalt/10">
+          </div>
+          <div>
+            <label for="rBusiness" class="text-sm font-semibold">Business <span class="font-normal text-muted">(optional)</span></label>
+            <input id="rBusiness" name="business" type="text" autocomplete="organization" maxlength="80" placeholder="Your business name"
+              class="mt-2 w-full rounded-xl border border-line bg-paper px-4 py-3 text-base outline-none transition placeholder:text-muted/60 focus:border-cobalt focus:bg-white focus:ring-4 focus:ring-cobalt/10">
+          </div>
+        </div>
+        <div>
+          <label for="rText" class="text-sm font-semibold">Your review <span class="text-cobalt">*</span></label>
+          <textarea id="rText" name="review" rows="4" maxlength="600" placeholder="How was working with LAW7A? Has your new site brought in more enquiries?"
+            class="mt-2 w-full resize-y rounded-xl border border-line bg-paper px-4 py-3 text-base outline-none transition placeholder:text-muted/60 focus:border-cobalt focus:bg-white focus:ring-4 focus:ring-cobalt/10"></textarea>
+        </div>
+        <p id="reviewErr" hidden class="flex items-center gap-1.5 text-sm text-red-600"><i data-lucide="alert-circle" class="h-4 w-4"></i><span>Please add a star rating, your name and your review.</span></p>
+        <a id="reviewSend" href="https://wa.me/27696985962" target="_blank" rel="noopener" class="btn-wa w-full !py-3.5"><i data-lucide="send" class="h-4 w-4"></i>Send review via WhatsApp</a>
+        <p class="text-center text-xs text-muted">By sending, you agree we may publish your review with your name and business on this website.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FAQ ============ -->
 <section id="faq" class="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1.5fr] lg:py-28">
   <div data-reveal>
@@ -599,6 +660,7 @@
           <li><a class="hover:text-white" href="#work">Work</a></li>
           <li><a class="hover:text-white" href="#process">How It Works</a></li>
           <li><a class="hover:text-white" href="#pricing">Pricing</a></li>
+          <li><a class="hover:text-white" href="#reviews">Reviews</a></li>
           <li><a class="hover:text-white" href="#faq">FAQ</a></li>
         </ul>
       </nav>
@@ -756,6 +818,58 @@
     update();
   }));
   update();
+
+  // Reviews. To publish one you've received on WhatsApp, add a line here (real clients only):
+  // { name: 'First name + initial', business: 'Business name', rating: 5, text: 'Their words, unedited.' },
+  const REVIEWS = [
+  ];
+
+  const reviewList = document.getElementById('reviewList');
+  reviewList.hidden = !REVIEWS.length;
+  document.getElementById('reviewEmpty').hidden = REVIEWS.length > 0;
+  const stars = n => '★'.repeat(n) + '☆'.repeat(5 - n);
+  for (const r of REVIEWS) {
+    const card = document.createElement('figure');
+    card.className = 'card flex flex-col p-6';
+    card.innerHTML = '<p class="font-mono text-lg tracking-widest text-amber-500"></p><blockquote class="mt-3 flex-1 leading-relaxed text-ink"></blockquote><figcaption class="mt-5 border-t border-line pt-4 text-sm"><span class="block font-semibold"></span><span class="block text-muted"></span></figcaption>';
+    const [rating, quote, cap] = card.children;
+    rating.textContent = stars(r.rating);
+    rating.setAttribute('aria-label', `${r.rating} out of 5 stars`);
+    quote.textContent = `“${r.text}”`;
+    cap.children[0].textContent = r.name;
+    cap.children[1].textContent = r.business || '';
+    reviewList.append(card);
+  }
+
+  const reviewForm = document.getElementById('reviewForm');
+  const reviewSend = document.getElementById('reviewSend');
+  const reviewErr = document.getElementById('reviewErr');
+  function reviewMessage() {
+    const d = new FormData(reviewForm);
+    const rating = Number(d.get('rating')) || 0;
+    const lines = ["Hi LAW7A, here's my review for your website:", '',
+      `Rating: ${stars(rating)} (${rating}/5)`, `Name: ${d.get('name').trim()}`];
+    if (d.get('business').trim()) lines.push(`Business: ${d.get('business').trim()}`);
+    lines.push(`Review: ${d.get('review').trim()}`, '', "I'm happy for LAW7A to publish this review on its website.");
+    return lines.join('\n');
+  }
+  const reviewMissing = () => {
+    const d = new FormData(reviewForm);
+    if (!d.get('rating')) return reviewForm.querySelector('#r5');
+    return ['name', 'review'].map(n => reviewForm.elements[n]).find(el => !el.value.trim());
+  };
+  reviewForm.addEventListener('input', () => {
+    reviewSend.href = waUrl(reviewMessage());
+    if (!reviewMissing()) reviewErr.hidden = true;
+  });
+  reviewForm.addEventListener('submit', e => { e.preventDefault(); reviewSend.click(); });
+  reviewSend.addEventListener('click', e => {
+    const missing = reviewMissing();
+    if (!missing) return;
+    e.preventDefault();
+    reviewErr.hidden = false;
+    missing.focus();
+  });
 </script>
 </body>
 </html>
